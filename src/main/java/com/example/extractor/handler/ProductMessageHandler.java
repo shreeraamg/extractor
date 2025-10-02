@@ -57,9 +57,9 @@ public class ProductMessageHandler {
         if (!violations.isEmpty()) {
             violations.forEach(v ->
                     log.warn("{}: {}", v.getPropertyPath(), v.getMessage()));
-        }
 
-        throw new RuntimeException("Validation failed on one or more fields");
+            throw new RuntimeException("Validation failed on one or more fields");
+        }
     }
 
     private void save(Product product) {

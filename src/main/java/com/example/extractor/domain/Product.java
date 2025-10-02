@@ -12,6 +12,7 @@ import java.util.List;
 public class Product {
 
     @Id
+    @NotBlank(message = "Product id cannot be empty")
     private String id;
 
     @NotBlank(message = "Product name cannot be empty")

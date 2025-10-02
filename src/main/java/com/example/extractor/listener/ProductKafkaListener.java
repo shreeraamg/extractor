@@ -28,8 +28,8 @@ public class ProductKafkaListener {
 
             handler.handle(record);
         } catch (Exception ex) {
-            log.error("Exception while reading message: {}", ex.getMessage());
-            ex.printStackTrace();
+            log.error("Exception while processing record topic: {}, partition: {}, offset: {}, error: {}",
+                    record.topic(), record.partition(), record.offset(), ex.getMessage(), ex);
         }
     }
 }
