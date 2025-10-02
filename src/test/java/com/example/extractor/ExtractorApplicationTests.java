@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
