@@ -4,7 +4,6 @@ import com.example.extractor.handler.ProductMessageHandler;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,6 @@ public class ProductKafkaListener {
 
     private final ProductMessageHandler handler;
 
-    @Autowired
     public ProductKafkaListener(ProductMessageHandler productMessageHandler) {
         handler = productMessageHandler;
     }

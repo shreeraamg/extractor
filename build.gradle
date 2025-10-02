@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.7.18'
-	id 'io.spring.dependency-management' version '1.1.3'
+	id 'org.springframework.boot' version '3.5.6'
+	id 'io.spring.dependency-management' version '1.1.7'
     id 'org.openrewrite.rewrite' version '7.16.0'
 }
 
@@ -10,7 +10,7 @@ version = '0.0.1'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(11)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -23,9 +23,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.kafka:spring-kafka'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    rewrite platform('org.openrewrite.recipe:rewrite-recipe-bom:latest.release')
+    rewrite 'org.openrewrite.recipe:rewrite-migrate-java'
+    rewrite 'org.openrewrite.recipe:rewrite-spring:6.15.0'
 }
 
 tasks.named('test') {
@@ -34,6 +39,8 @@ tasks.named('test') {
 
 rewrite {
     activeRecipe(
-            'org.openrewrite.java.OrderImports',
+            'org.openrewrite.java.migrate.UpgradeToJava21',
+            'org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_5'
     )
+    setExportDatatables(true)
 }
