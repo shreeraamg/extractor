@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.util.List;
 
-@Document(collection = "products_v1")
+@Document(collection = "#{@applicationConfig.getProductCollectionName()}")
 public class Product {
 
     @Id

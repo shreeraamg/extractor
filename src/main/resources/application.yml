@@ -18,3 +18,9 @@ logging:
   level:
     org.mongodb: WARN
     org.apache.kafka: WARN
+
+app:
+  mongodb:
+    collection-name: products_v1
+  kafka:
+    topic-name: product-topic

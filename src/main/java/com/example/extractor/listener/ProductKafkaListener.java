@@ -18,7 +18,7 @@ public class ProductKafkaListener {
         handler = productMessageHandler;
     }
 
-    @KafkaListener(topics = "product-topic")
+    @KafkaListener(topics = "${app.kafka.topic-name}")
     public void listen(ConsumerRecord<String, String> record) {
         try {
             log.info("Reading message from kafka topic: {}, partition: {}, offset: {}",
