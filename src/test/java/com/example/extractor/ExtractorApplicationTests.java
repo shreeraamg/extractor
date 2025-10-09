@@ -3,6 +3,7 @@ package com.example.extractor;
 import com.example.extractor.domain.Product;
 import com.example.extractor.handler.ProductMessageHandler;
 import com.example.extractor.repository.ProductRepository;
+import com.example.extractor.util.TextUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -32,6 +33,9 @@ class ExtractorApplicationTests {
     @Mock
     private ProductRepository productRepository;
 
+    @Mock
+    private TextUtil textUtil;
+
     private Validator validator;
 
     @InjectMocks
@@ -47,7 +51,7 @@ class ExtractorApplicationTests {
         validator = factory.getValidator();
 
         // Create handler with mocks + real validator
-        handler = new ProductMessageHandler(objectMapper, productRepository, validator);
+        handler = new ProductMessageHandler(objectMapper, productRepository, textUtil, validator);
     }
 
     @Test

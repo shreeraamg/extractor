@@ -2,6 +2,7 @@ package com.example.extractor.handler;
 
 import com.example.extractor.domain.Product;
 import com.example.extractor.repository.ProductRepository;
+import com.example.extractor.util.TextUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -22,21 +23,29 @@ public class ProductMessageHandler {
 
     private final ProductRepository productRepository;
 
+    private final TextUtil textUtil;
+
     private final Validator validator;
 
     public ProductMessageHandler(
             ObjectMapper objectMapper,
             ProductRepository productRepository,
+            TextUtil textUtil,
             Validator validator
     ) {
         this.objectMapper = objectMapper;
         this.productRepository = productRepository;
+        this.textUtil = textUtil;
         this.validator = validator;
     }
 
     public void handle(ConsumerRecord<String, String> record) {
         try {
             Product product = parse(record.value());
+
+            String sanitizedName = textUtil.sanitizeProductName(product.getName());
+            product.setName(sanitizedName);
+
             validate(product);
             save(product);
         } catch (Exception ex) {
