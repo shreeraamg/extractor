@@ -24,6 +24,9 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           JAVA_HOME: ${{ env.JAVA_HOME }}
+        with:
+          command: test
+          args: --severity-threshold=low -- --gradle-sub-command=./gradlew
 
       - name: Run Snyk Fix
         uses: snyk/actions/gradle@master
@@ -32,6 +35,7 @@ jobs:
           JAVA_HOME: ${{ env.JAVA_HOME }}
         with:
           command: fix
+          args: -- --gradle-sub-command=./gradlew
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
