@@ -1,0 +1,5 @@
+version: v1.25.1
+patch: {}
+language-settings:
+  java:
+    targetFile: build.gradle
