@@ -29,7 +29,7 @@ public class Product {
     private Double price;
 
     @NotNull(message = "Availability must be specified")
-    private Boolean isAvailable;
+    private boolean isAvailable;
 
     @NotNull(message = "Quantity must be specified")
     @PositiveOrZero(message = "Quantity cannot be negative")
@@ -80,11 +80,11 @@ public class Product {
         this.price = price;
     }
 
-    public Boolean getAvailable() {
+    public boolean getAvailable() {
         return isAvailable;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(boolean available) {
         isAvailable = available;
     }
 
