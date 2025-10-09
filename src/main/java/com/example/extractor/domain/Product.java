@@ -3,12 +3,12 @@ package com.example.extractor.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.util.List;
 
-@Document(collection = "products_v1")
+@Document(collection = "#{@applicationConfig.getProductCollectionName()}")
 public class Product {
 
     @Id
@@ -29,7 +29,7 @@ public class Product {
     private Double price;
 
     @NotNull(message = "Availability must be specified")
-    private Boolean isAvailable;
+    private boolean isAvailable;
 
     @NotNull(message = "Quantity must be specified")
     @PositiveOrZero(message = "Quantity cannot be negative")
@@ -80,11 +80,11 @@ public class Product {
         this.price = price;
     }
 
-    public Boolean getAvailable() {
+    public boolean getAvailable() {
         return isAvailable;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(boolean available) {
         isAvailable = available;
     }
 
