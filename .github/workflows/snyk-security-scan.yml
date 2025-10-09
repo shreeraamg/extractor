@@ -30,6 +30,13 @@ jobs:
         with:
           args: --severity-threshold=low
 
+      - name: Run Snyk Fix
+        uses: snyk/actions/gradle@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: fix
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
