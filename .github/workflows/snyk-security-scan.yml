@@ -23,11 +23,12 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Snyk Test
-        uses: snyk/actions/gradle@master
+        run: |
+          echo "JAVA_HOME=${JAVA_HOME}"
+          ./gradlew -v
+          npx snyk test --severity-threshold=low
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --severity-threshold=low -- --gradle-sub-command=./gradlew
 
       - name: Run Snyk Fix
         uses: snyk/actions/gradle@master
