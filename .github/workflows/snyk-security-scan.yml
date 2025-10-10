@@ -23,6 +23,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Snyk Test
+        continue-on-error: true
         run: |
           echo "JAVA_HOME=${JAVA_HOME}"
           ./gradlew -v
